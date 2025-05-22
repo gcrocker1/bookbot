@@ -1,3 +1,4 @@
+import sys
 from stats import count_words, count_characters, sort_dict
 
 def get_book_text(filepath):
@@ -6,12 +7,15 @@ def get_book_text(filepath):
     return file_contents
 
 def main():
-    print("============ BOOKBOT ============")
+    if len(sys.argv) < 2:   # if path to file is not provided, prompt the user to do so
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
 
-    book_file = 'books/frankenstein.txt'
+    book_file = sys.argv[1]     # Using system arguments to get path to file from user input on CLI
     book_text = get_book_text(book_file)
     num_words = count_words(book_text)
 
+    print("============ BOOKBOT ============")
     print(f"Analyzing book found at {book_file}...")
     print("----------- Word Count ----------")
     print(f"Found {num_words} total words")
